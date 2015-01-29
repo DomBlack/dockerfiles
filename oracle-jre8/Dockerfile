@@ -16,7 +16,7 @@ RUN yum install -y wget \
   && yum -y remove wget \
   && rm -rf "jre-$JRE_VERSION-linux-x64.rpm" \
             MD5SUM \
-  && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 1
+  && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 999999
 
 # If running this image directly, we most likely want bash
 CMD ["/bin/bash", "--login"]

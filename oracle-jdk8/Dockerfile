@@ -21,8 +21,8 @@ RUN yum install -y wget \
             "$JAVA_HOME/lib/missioncontrol" \
             "$JAVA_HOME/bin/jmc*" \
             "$JAVA_HOME/bin/jvisualvm" \
-  && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 1 \
-  && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 1
+  && update-alternatives --install /usr/bin/java java $JAVA_HOME/bin/java 999999 \
+  && update-alternatives --install /usr/bin/javac javac $JAVA_HOME/bin/javac 999999
 
 # If running this image directly, we most likely want bash
 CMD ["/bin/bash", "--login"]
