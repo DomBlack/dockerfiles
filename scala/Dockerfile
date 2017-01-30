@@ -19,7 +19,7 @@ RUN yum install -y wget \
 COPY sbt /usr/local/bin/
 
 # Force SBT to download dependancies and then exit
-RUN sbt exit
+RUN java $SBT_OPTS -jar /usr/local/bin/sbt-launch.jar "exit"
 
 # If running this image directly, we most likely want the scala REPL
 CMD ["scala"]
