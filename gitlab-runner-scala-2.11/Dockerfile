@@ -1,7 +1,8 @@
 FROM domblack/scala:latest
 
 LABEL maintainer "thephenix@gmail.com"
+x
 
-COPY install_deps.sh /
+COPY install_protobuf.sh /
 
-RUN /install_deps.sh
+RUN /install_protobuf.sh
