@@ -10,12 +10,7 @@ export CXXFLAGS="$CXXFLAGS -fPIC"
 # Author: Klaus Reimer <k@ailis.de>
 #
 
-# Check if JAVA_HOME is set
-if [ "$JAVA_HOME" = "" ]
-then
-    echo "ERROR: JAVA_HOME must be set."
-    exit 1
-fi
+JAVA_HOME=/usr/java/latest
 
 # Check if cacerts file is present
 if [ ! -f $JAVA_HOME/lib/security/cacerts ]
