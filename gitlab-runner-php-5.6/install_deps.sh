@@ -13,14 +13,18 @@ chmod +x /usr/local/bin/phpunit
 # Here you can install any other extension that you need
 docker-php-ext-install pdo_mysql
 docker-php-ext-install mcrypt
+docker-php-ext-install bcmath
 
 echo "\n" | pecl install scrypt
 
 pecl install memcache
 pecl install memcached
+pecl install APC
 
 docker-php-ext-enable scrypt
 docker-php-ext-enable memcache
 docker-php-ext-enable memcached
+docker-php-ext-enable APC
 
 echo "date.timezone = \"UTC\"" > /usr/local/etc/php/conf.d/docker-php-timezone.ini
+echo "apc.enable_cli = 1" > /usr/local/etc/php/conf.d/docker-php-apc.ini
