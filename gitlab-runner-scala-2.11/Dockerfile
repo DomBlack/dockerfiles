@@ -4,7 +4,7 @@ LABEL maintainer "thephenix@gmail.com"
 
 COPY install_protobuf.sh /
 
-RUN yum install -y wget gcc gcc-c++ \
+RUN yum install -y wget gcc gcc-c++ make \
   && /install_protobuf.sh \
   && yum clean all \
-  && yum -y remove wget gcc gcc-c++
+  && yum -y remove wget gcc gcc-c++ make
