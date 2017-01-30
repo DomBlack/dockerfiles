@@ -21,6 +21,7 @@ fi
 
 # Download the startssl certs
 echo "Downloading certs..."
+wget --quiet --continue http://ca.sensatus.com/SensatusCA.crt
 wget --quiet --continue http://www.startssl.com/certs/ca.crt
 wget --quiet --continue http://www.startssl.com/certs/sub.class1.server.ca.crt
 wget --quiet --continue http://www.startssl.com/certs/sub.class2.server.ca.crt
@@ -28,7 +29,8 @@ wget --quiet --continue http://www.startssl.com/certs/sub.class3.server.ca.crt
 wget --quiet --continue http://www.startssl.com/certs/sub.class4.server.ca.crt
 
 # Install certs into global keystore
-echo "Adding certs to cacerts keystore (sudo password required)..."
+echo "Adding certs to cacerts keystore..."
+$JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias sensatus.ca -file SensatusCA.crt
 $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca -file ca.crt
 $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class1 -file sub.class1.server.ca.crt
 $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/cacerts -storepass changeit -noprompt -alias startcom.ca.sub.class2 -file sub.class2.server.ca.crt
@@ -38,7 +40,8 @@ $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/securi
 # If jsse is installed then also put the certs into jssecacerts keystore
 if [ -f $JAVA_HOME/jre/lib/security/jssecacerts ]
 then
-    echo "Adding certs to jssecacerts keystore (sudo password required)..."
+    echo "Adding certs to jssecacerts keystore..."
+    $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/jssecacerts -storepass changeit -noprompt -alias sensatus.ca -file SensatusCA.crt
     $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/jssecacerts -storepass changeit -noprompt -alias startcom.ca -file ca.crt
     $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/jssecacerts -storepass changeit -noprompt -alias startcom.ca.sub.class1 -file sub.class1.server.ca.crt
     $JAVA_HOME/bin/keytool -import -trustcacerts -keystore $JAVA_HOME/jre/lib/security/jssecacerts -storepass changeit -noprompt -alias startcom.ca.sub.class2 -file sub.class2.server.ca.crt
