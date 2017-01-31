@@ -20,7 +20,7 @@ echo "\n" | pecl install scrypt
 
 pecl install memcache
 pecl install memcached
-pecl install APCu
+pecl install APCu-4.0.11
 
 docker-php-ext-enable scrypt
 docker-php-ext-enable memcache
