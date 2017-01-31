@@ -17,12 +17,10 @@ docker-php-ext-install mcrypt
 docker-php-ext-install bcmath
 
 echo "\n" | pecl install scrypt
-pecl install memcache
 pecl install memcached
 pecl install xdebug
 
 docker-php-ext-enable scrypt
-docker-php-ext-enable memcache
 docker-php-ext-enable memcached
 docker-php-ext-enable xdebug
 
