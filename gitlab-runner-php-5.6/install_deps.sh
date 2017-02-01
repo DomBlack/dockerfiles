@@ -15,17 +15,16 @@ chmod +x /usr/local/bin/phpunit
 docker-php-ext-install pdo_mysql
 docker-php-ext-install mcrypt
 docker-php-ext-install bcmath
+docker-php-ext-install soap
 
 echo "\n" | pecl install scrypt
 pecl install memcache
 pecl install memcached
 pecl install xdebug
-pecl install soap
 
 docker-php-ext-enable scrypt
 docker-php-ext-enable memcache
 docker-php-ext-enable memcached
 docker-php-ext-enable xdebug
-docker-php-ext-enable soap
 
 echo "date.timezone = \"UTC\"" > /usr/local/etc/php/conf.d/docker-php-timezone.ini
