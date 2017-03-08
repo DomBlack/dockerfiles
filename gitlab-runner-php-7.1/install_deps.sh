@@ -7,7 +7,7 @@ apt-get update -yqq
 apt-get install git libmemcached-dev libmcrypt-dev zlib1g-dev -yqq
 
 # Install phpunit, the tool that we will use for testing
-curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit.phar
+curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
 chmod +x /usr/local/bin/phpunit
 
 # Install mysql driver
