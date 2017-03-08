@@ -15,6 +15,7 @@ chmod +x /usr/local/bin/phpunit
 docker-php-ext-install pdo_mysql
 docker-php-ext-install mcrypt
 docker-php-ext-install bcmath
+docker-php-ext-install soap
 
 echo "\n" | pecl install scrypt
 pecl install memcached

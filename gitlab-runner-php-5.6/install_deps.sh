@@ -18,12 +18,10 @@ docker-php-ext-install bcmath
 docker-php-ext-install soap
 
 echo "\n" | pecl install scrypt
-pecl install memcache
-pecl install memcached
+pecl install memcached-2.2.0
 pecl install xdebug
 
 docker-php-ext-enable scrypt
-docker-php-ext-enable memcache
 docker-php-ext-enable memcached
 docker-php-ext-enable xdebug
 
