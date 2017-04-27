@@ -2,13 +2,15 @@ FROM centos:latest
 
 MAINTAINER DomBlack <thephenix@gmail.com>
 
-ENV JDK_VERSION 8u31
-ENV JDK_CHECKSUM be6abc353ef797755c1c9260c27422e9
+ENV JDK_VERSION 8u131
+ENV JDK_BUILD_NUM b11
+ENV JDK_DOWNLOAD_HASH d54c1d3a095b4ff2b6607d096fa80163
+ENV JDK_CHECKSUM 9024d13ec651d07de450d465f14065a6
 ENV JAVA_HOME /usr/java/latest
 
 # Download and install the required version of Oracle's JDK
 RUN yum install -y wget \
-  && wget --quiet --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JDK_VERSION-b13/jdk-$JDK_VERSION-linux-x64.rpm" \
+  && wget --quiet --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JDK_VERSION-$JDK_BUILD_NUM/$JDK_DOWNLOAD_HASH/jdk-$JDK_VERSION-linux-x64.rpm" \
   && echo "$JDK_CHECKSUM  jdk-$JDK_VERSION-linux-x64.rpm" >> MD5SUM \
   && md5sum -c MD5SUM \
   && yum install -y "jdk-$JDK_VERSION-linux-x64.rpm" \
