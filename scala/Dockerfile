@@ -19,4 +19,4 @@ RUN yum install -y wget \
   && rm -fR /tmp/*
 
 # If running this image directly, we most likely want the scala REPL
-ENTRYPOINT ["sbt", "-sbt-create"]
+CMD ["sbt", "-sbt-create"]
