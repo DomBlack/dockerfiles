@@ -2,24 +2,21 @@ FROM domblack/oracle-jdk8:latest
 
 MAINTAINER DomBlack <thephenix@gmail.com>
 
-ENV SCALA_VERSION 2.11.8
-ENV SBT_VERSION 0.13.13
-ENV SCALA_HOME /usr/share/scala
-
-# Download and install the required version of Scala
-RUN yum install -y wget \
-  && wget --quiet "http://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.rpm" \
-  && wget --quiet "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$SBT_VERSION/sbt-launch.jar" -O /usr/local/bin/sbt-launch.jar \
-  && yum install -y "scala-$SCALA_VERSION.rpm" sbt \
-  && yum clean all \
-  && yum -y remove wget \
-  && rm -rf "scala-$SCALA_VERSION.rpm"
+ENV SBT_VERSION 0.13.15
 
 # Copy the SBT shell script into the image
 COPY sbt /usr/local/bin/
 
-# Force SBT to download dependancies and then exit
-RUN java $SBT_OPTS -jar /usr/local/bin/sbt-launch.jar "exit"
+# Download and install SBT, then force SBT to download and compile the compiler-interface for both 2.11 and 2.12
+RUN yum install -y wget \
+  && mkdir -p /root/.sbt/launchers/$SBT_VERSION \
+  && wget --quiet "https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$SBT_VERSION/sbt-launch.jar" -O /root/.sbt/launchers/$SBT_VERSION/sbt-launch.jar \
+  && yum -y remove wget \
+  && echo 'object TestApp { def main(args: Array[String]): Unit = println("Hello from Scala " + scala.util.Properties.versionNumberString)  }' > /tmp/TestApp.scala \
+  && cd /tmp/ \
+  && sbt -sbt-create -211 run \
+  && sbt -sbt-create -212 run \
+  && rm -fR /tmp/*
 
 # If running this image directly, we most likely want the scala REPL
-CMD ["scala"]
+ENTRYPOINT ["sbt", "-sbt-create"]
