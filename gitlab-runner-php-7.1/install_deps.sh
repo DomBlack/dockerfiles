@@ -20,9 +20,13 @@ docker-php-ext-install soap
 echo "\n" | pecl install scrypt
 pecl install memcached
 pecl install xdebug
+pecl install yaml
 
 docker-php-ext-enable scrypt
 docker-php-ext-enable memcached
 docker-php-ext-enable xdebug
+docker-php-ext-enable yaml
 
 echo "date.timezone = \"UTC\"" > /usr/local/etc/php/conf.d/docker-php-timezone.ini
+
+rm -rf /tmp/*
