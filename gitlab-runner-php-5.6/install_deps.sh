@@ -20,7 +20,7 @@ docker-php-ext-install soap
 echo "\n" | pecl install scrypt
 pecl install memcached-2.2.0
 pecl install xdebug
-pecl install yaml-1.31
+pecl install yaml-1.3.1
 
 docker-php-ext-enable scrypt
 docker-php-ext-enable memcached
