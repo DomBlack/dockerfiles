@@ -2,7 +2,7 @@ FROM domblack/oracle-jdk8:latest
 
 MAINTAINER DomBlack <thephenix@gmail.com>
 
-ENV SBT_VERSION 0.13.15
+ENV SBT_VERSION 0.13.16
 
 # Copy the SBT shell script into the image
 COPY sbt /usr/local/bin/
