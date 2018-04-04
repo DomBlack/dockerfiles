@@ -4,11 +4,15 @@ set -xe
 
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
-apt-get install git wget libmemcached-dev libmcrypt-dev zlib1g-dev libxml2-dev libyaml-dev libpng-dev zlib1g-dev libicu-dev g++ -yqq
+apt-get install git wget libmemcached-dev libmcrypt-dev zlib1g-dev libxml2-dev libyaml-dev libpng-dev zlib1g-dev libicu-dev g++ gnupg -yqq
 
 # Install phpunit, the tool that we will use for testing
 curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-7.phar
 chmod +x /usr/local/bin/phpunit
+
+# Install noded
+curl -sL https://deb.nodesource.com/setup_9.x | bash -
+apt-get install -y nodejs
 
 # Install mysql driver
 # Here you can install any other extension that you need
