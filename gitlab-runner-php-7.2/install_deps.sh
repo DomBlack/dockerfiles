@@ -4,7 +4,7 @@ set -xe
 
 # Install git (the php image doesn't have it) which is required by composer
 apt-get update -yqq
-apt-get install git wget libmemcached-dev libmcrypt-dev zlib1g-dev libxml2-dev libyaml-dev libpng-dev -yqq
+apt-get install git wget libmemcached-dev libmcrypt-dev zlib1g-dev libxml2-dev libyaml-dev libpng-dev zlib1g-dev libicu-dev g++ -yqq
 
 # Install phpunit, the tool that we will use for testing
 curl --location --output /usr/local/bin/phpunit https://phar.phpunit.de/phpunit-7.phar
@@ -16,6 +16,9 @@ docker-php-ext-install pdo_mysql
 docker-php-ext-install bcmath
 docker-php-ext-install soap
 docker-php-ext-install gd
+
+docker-php-ext-configure intl
+docker-php-ext-install intl
 
 echo "\n" | pecl install scrypt
 pecl install memcached
