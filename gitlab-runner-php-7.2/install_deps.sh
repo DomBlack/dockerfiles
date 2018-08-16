@@ -14,6 +14,17 @@ chmod +x /usr/local/bin/phpunit
 curl -sL https://deb.nodesource.com/setup_9.x | bash -
 apt-get install -y nodejs
 
+# Install an up to date ICU
+curl -fsS -o /tmp/icu.tgz -L http://download.icu-project.org/files/icu4c/62.1/icu4c-62_1-src.tgz \
+  && tar -zxf /tmp/icu.tgz -C /tmp \
+  && cd /tmp/icu/source \
+  && ./configure --prefix=/usr/local \
+  && make \
+  && make install \
+
+# PHP_CPPFLAGS are used by the docker-php-ext-* scripts
+export PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
+
 # Install mysql driver
 # Here you can install any other extension that you need
 docker-php-ext-install pdo_mysql
@@ -22,7 +33,7 @@ docker-php-ext-install soap
 docker-php-ext-install gd
 docker-php-ext-install zip
 
-docker-php-ext-configure intl
+docker-php-ext-configure intl --with-icu-dir=/usr/local
 docker-php-ext-install intl
 
 echo "\n" | pecl install scrypt
