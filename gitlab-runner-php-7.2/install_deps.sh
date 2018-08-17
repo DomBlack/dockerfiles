@@ -21,6 +21,7 @@ curl -fsS -o /tmp/icu.tgz -L http://download.icu-project.org/files/icu4c/62.1/ic
   && ./configure --prefix=/usr/local \
   && make \
   && make install \
+  && cd /
 
 # PHP_CPPFLAGS are used by the docker-php-ext-* scripts
 export PHP_CPPFLAGS="$PHP_CPPFLAGS -std=c++11"
@@ -48,6 +49,6 @@ docker-php-ext-enable yaml
 
 echo "date.timezone = \"UTC\"" > /usr/local/etc/php/conf.d/docker-php-timezone.ini
 
-wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
+wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php
 
 rm -rf /tmp/*
